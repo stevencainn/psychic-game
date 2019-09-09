@@ -6,8 +6,7 @@ var lettersGuessed = [];
 var guessesLeft = 10;
 var computerRandom = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
 
-
-// computer generates random letter from array
+// create variable for random computer letter but i difine it in resetGame function
 var computerLetter; 
 
 //calling upon reset function before game starts
@@ -28,7 +27,7 @@ document.onkeypress = function(event) {
     }
 
     //if users guess does not equal computers letter then guessesleft goes down 1 and lettersguessed gets pushed to line
-    if (userGuess !== computerLetter) {
+    else if (userGuess !== computerLetter) {
         guessesLeft --;
         lettersGuessed.push(userGuess);
         //call upon id within function to input back to html file
@@ -37,7 +36,7 @@ document.onkeypress = function(event) {
     }
 
     //if guessed left is 0 then user alerted, guesses left/ letters guessed resets and losses goes up 1
-    if (guessesLeft < 1 ) {
+     if (guessesLeft < 1 ) {
         alert("YOU LOST TRY AGAIN!")
         losses++;
         document.getElementById("youLose").innerHTML = "losses: " + losses;
