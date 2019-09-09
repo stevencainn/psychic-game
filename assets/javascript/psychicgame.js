@@ -8,12 +8,12 @@ var computerRandom = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"
 
 
 // computer generates random letter from array
-var computerLetter = computerRandom[Math.floor(Math.random() * computerRandom.length)]; 
-console.log("the letter is ", computerLetter)
+var computerLetter; 
 
+//calling upon reset function before game starts
+resetGame();
 
 //make a function when user clicks on a key
-
 document.onkeypress = function(event) {
     var userGuess = event.key.toLowerCase();
     
@@ -22,12 +22,9 @@ document.onkeypress = function(event) {
     if (userGuess === computerLetter) {
         alert("YOU WON!!!");
         wins++;
-        guessesLeft = 10;
-        lettersGuessed = [];
         //call upon id within function to input back to html file
         document.getElementById("youWin").innerHTML = "Wins: " + wins;
-        document.getElementById("soFar").innerHTML = "Guesses So Far: " + lettersGuessed;
-
+        resetGame();
     }
 
     //if users guess does not equal computers letter then guessesleft goes down 1 and lettersguessed gets pushed to line
@@ -37,22 +34,26 @@ document.onkeypress = function(event) {
         //call upon id within function to input back to html file
         document.getElementById("soFar").innerHTML = "Guesses So Far: " + lettersGuessed;
         document.getElementById("youGuessed").innerHTML = "Guesses Left: " + guessesLeft;
-
     }
 
     //if guessed left is 0 then user alerted, guesses left/ letters guessed resets and losses goes up 1
     if (guessesLeft < 1 ) {
         alert("YOU LOST TRY AGAIN!")
-        guessesLeft = 10;
         losses++;
-        lettersGuessed = [];
-        //call upon id within function to input back to html file
         document.getElementById("youLose").innerHTML = "losses: " + losses;
-        document.getElementById("soFar").innerHTML = "Guesses So Far: " + lettersGuessed;
-        document.getElementById("youGuessed").innerHTML = "Guesses Left: " + guessesLeft;
+        resetGame();
     }
 
 
 }
 
+ //defining reset game as function to simplify code and re use in different if statements
+ function resetGame(){
+    computerLetter = computerRandom[Math.floor(Math.random() * computerRandom.length)];
+    console.log("this is the letter ", computerLetter) 
+    lettersGuessed = [];
+    guessesLeft = 10;
+    document.getElementById("soFar").innerHTML = "Guesses So Far: " + lettersGuessed;
+    document.getElementById("youGuessed").innerHTML = "Guesses Left: " + guessesLeft;
+    }
 
