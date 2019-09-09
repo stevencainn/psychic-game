@@ -26,7 +26,7 @@ document.onkeypress = function(event) {
         resetGame();
     }
 
-    //if users guess does not equal computers letter then guessesleft goes down 1 and lettersguessed gets pushed to line
+    //else if users guess does not equal computers letter then guessesleft goes down 1 and lettersguessed gets pushed to line
     else if (userGuess !== computerLetter) {
         guessesLeft --;
         lettersGuessed.push(userGuess);
