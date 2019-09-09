@@ -3,37 +3,56 @@
 var wins = 0;
 var losses = 0;
 var lettersGuessed = [];
-var guessesLeft = 9;
+var guessesLeft = 10;
 var computerRandom = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+
+
+// computer generates random letter from array
+var computerLetter = computerRandom[Math.floor(Math.random() * computerRandom.length)]; 
+console.log("the letter is ", computerLetter)
 
 
 //make a function when user clicks on a key
 
-document.onkeyup = function(event) {
-    var userGuess = event.key.toLowerCase;
-
-    var computerLetter = computerRandom[Math.floor(Math.random() * computerRandom.length)]; // random letter from array
+document.onkeypress = function(event) {
+    var userGuess = event.key.toLowerCase();
     
+
     //if users guess is the same as computers guess then user alerted, wins goes up 1, guessesleft and letters guessed resets
     if (userGuess === computerLetter) {
         alert("YOU WON!!!");
         wins++;
-        guessesLeft = 9;
+        guessesLeft = 10;
         lettersGuessed = [];
+        //call upon id within function to input back to html file
+        document.getElementById("youWin").innerHTML = "Wins: " + wins;
+        document.getElementById("soFar").innerHTML = "Guesses So Far: " + lettersGuessed;
+
     }
 
     //if users guess does not equal computers letter then guessesleft goes down 1 and lettersguessed gets pushed to line
     if (userGuess !== computerLetter) {
         guessesLeft --;
-        lettersGuessed.push(lettersGuessed);
+        lettersGuessed.push(userGuess);
+        //call upon id within function to input back to html file
+        document.getElementById("soFar").innerHTML = "Guesses So Far: " + lettersGuessed;
+        document.getElementById("youGuessed").innerHTML = "Guesses Left: " + guessesLeft;
 
     }
 
     //if guessed left is 0 then user alerted, guesses left/ letters guessed resets and losses goes up 1
-    if (guessesLeft === 0) {
+    if (guessesLeft < 1 ) {
         alert("YOU LOST TRY AGAIN!")
-        guessesLeft = 9;
+        guessesLeft = 10;
         losses++;
         lettersGuessed = [];
+        //call upon id within function to input back to html file
+        document.getElementById("youLose").innerHTML = "losses: " + losses;
+        document.getElementById("soFar").innerHTML = "Guesses So Far: " + lettersGuessed;
+        document.getElementById("youGuessed").innerHTML = "Guesses Left: " + guessesLeft;
     }
+
+
 }
+
+
