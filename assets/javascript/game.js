@@ -16,21 +16,28 @@ resetGame();
 document.onkeypress = function(event){
 //make variable for when user cicks key
     var userGuess = event.key.toLowerCase();
+ // check if userGuess is a letter. If so, execute logic inside.
+ if (computerRandom.includes(userGuess)) {
 
  //if users guess is same as computer then user alerted, wins goes up 1, game resets
  if(userGuess === computerLetter) {
-     alert("YOU WON!!!");
      wins++;
-     //call upon id within this function to output back to htmlfile
+    //call upon id within this function to output back to htmlfile
      document.getElementById("youWin").innerHTML = "Wins: " + wins;
+     alert("YOU WON!!!");
      //call resetGame Function to reset when user wins
      resetGame();
+ }
+  // if userGuess has already been guessed, alert user and end logic.
+ else if (lettersGuessed.includes(userGuess)){
+     alert("YOU ALREADY GUESSED THAT LETTER");
+     return false;
  }
 
  //else(otherwise) if users guess does not equal computers letter then guessesLeft goes down 1 and userguess gets pushed to lettersGuessed then outputted to "soFar" in html
  else if (userGuess !== computerLetter){
      guessesLeft --;
-     lettersGuessed.push(userGuess)
+     lettersGuessed.push(userGuess);
      //call upon id within function to input back to htmlfile
      document.getElementById("soFar").innerHTML = "Guesses So Far: " + lettersGuessed;
      document.getElementById("youGuessed").innerHTML = "Guesses Left: " + guessesLeft; 
@@ -38,13 +45,14 @@ document.onkeypress = function(event){
 
  //if guesses left is 0 then user is alerted, losses goes up 1 and guessedLeft/lettersGuessed resets
  if (guessesLeft < 1 ) {
-     alert("YOU LOST TRY AGAIN!!")
      losses ++;
      //call upon id to output losses back to htmlfile
      document.getElementById("youLose").innerHTML = "losses: " + losses;
+     alert("YOU LOST TRY AGAIN!!");
      //call reset game function to reset game when user losses
      resetGame();
  }
+}
 
 }
 
